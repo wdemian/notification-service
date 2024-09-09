@@ -1,0 +1,7 @@
+limits:
+  news:
+    limit: 1
+    period: 24h
+  update:
+    limit: 3
+    period: 1m
