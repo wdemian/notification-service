@@ -11,6 +11,7 @@ A (very) basic Go-based test project to send notifications with rate limiting.
 
 ## Project Structure
 
+```
 ├── config.go       # Configuration loading
 ├── main.go         # Main application entry point
 ├── notifier
@@ -20,6 +21,7 @@ A (very) basic Go-based test project to send notifications with rate limiting.
 └── ratelimiter
     ├── ratelimiter.go  # Rate limiter implementation
     └── ratelimiter_test.go  # Unit tests for the rate limiter
+```
 
 ## Getting Started
 
@@ -37,8 +39,10 @@ A (very) basic Go-based test project to send notifications with rate limiting.
         Number of messages to send (default 3)
   -t string
         Notification Type (default "news")
+  -u string
+        Comma-separated list of destination users
 
- Example: bin/notification-service -c config.yaml -n 5 -t update
+ Example: bin/notification-service -c config.yaml -n 5 -t update -c userA,userB
 
 ```
 
