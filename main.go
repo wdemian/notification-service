@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/thatva/notification-service/notifier"
 	"github.com/thatva/notification-service/ratelimiter"
@@ -13,6 +14,7 @@ func main() {
 	configFile := flag.String("c", "", "Path to the configuration file")
 	numMessages := flag.Int("n", 3, "Number of messages to send")
 	notificationType := flag.String("t", "news", "Notification Type")
+	userList := flag.String("u", "", "Comma-separated list of destination users")
 	flag.Parse()
 
 	config, err := loadRateLimiterConfig(*configFile)
@@ -23,8 +25,15 @@ func main() {
 	rateLimiter := ratelimiter.NewRateLimiter(config)
 	service := notifier.NewNotifier(notifier.ConsoleGateway{}, rateLimiter)
 
+	users := strings.Split(*userList, ",")
+	if len(users) == 0 || users[0] == "" {
+		// Send message to User A and B if no users were provided
+		users = []string{"User A", "User B"}
+	}
 	for i := 0; i < *numMessages; i++ {
-		send(service, *notificationType, "user A", fmt.Sprintf("update %d", i+1))
+		for _, u := range users {
+			send(service, *notificationType, u, fmt.Sprintf("update %d", i+1))
+		}
 	}
 }
 
