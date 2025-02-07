@@ -12,14 +12,18 @@ A (very) basic Go-based test project to send notifications with rate limiting.
 ## Project Structure
 
 ```
-├── config.go       # Configuration loading
-├── main.go         # Main application entry point
+├── internal                
+    └── config               # Configuration loading
+├── main.go                  # Main application entry point
+├── cmd
+│   ├── web                  # Web service entry point
+│   └── cli                  # CLI tool to test notifications
 ├── notifier
-│   ├── gateway.go   # Gateway interface and console implementation
-│   ├── notifier.go  # Notification service implementation
-│   └── notifier_test.go  # Unit tests for the notifier
+│   ├── gateway.go           # Gateway interface and console implementation
+│   ├── notifier.go          # Notification service implementation
+│   └── notifier_test.go     # Unit tests for the notifier
 └── ratelimiter
-    ├── ratelimiter.go  # Rate limiter implementation
+    ├── ratelimiter.go       # Rate limiter implementation
     └── ratelimiter_test.go  # Unit tests for the rate limiter
 ```
 
@@ -33,6 +37,19 @@ A (very) basic Go-based test project to send notifications with rate limiting.
 ```bash
    bin/notification-service -h
    Usage of bin/notification-service:
+  -c string
+        Path to the configuration file
+  -p int
+        Port to listen on (default 8080)
+
+ Example: bin/notification-service -c config.yaml -p 8080
+```
+
+The cli tool has some extra options for testing:
+
+```bash
+   bin/notification-service-cli -h
+   Usage of bin/notification-service-cli:
   -c string
         Path to the configuration file
   -n int

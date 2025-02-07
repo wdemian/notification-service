@@ -5,3 +5,5 @@ limits:
   update:
     limit: 3
     period: 1m
+  non:
+    limit: 0
