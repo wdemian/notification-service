@@ -30,7 +30,7 @@ A (very) basic Go-based test project to send notifications with rate limiting.
 ## Getting Started
 
    ```bash
-   git clone [https://github.com/thatva/notification-service.git](https://github.com/thatva/notification-service.git)
+   git clone https://github.com/thatva/notification-service.git
    make deps && make build
    ```
 
